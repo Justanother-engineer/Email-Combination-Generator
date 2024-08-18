@@ -44,16 +44,33 @@ def process_input_file(file_path, domain):
     emails = []
     try:
         with open(file_path, "r") as file:
-            for line in file:
-                first_name, last_name, *middle_name = line.strip().split()
-                middle_name = middle_name[0] if middle_name else None
+            for line_number, line in enumerate(file, start=1):
+                line = line.strip()
+                
+                # Skip empty lines
+                if not line:
+                    continue
+
+                parts = line.split()
+
+                # Check for valid formats: [first_name, last_name] or [first_name, middle_name, last_name]
+                if len(parts) == 2:
+                    first_name, last_name = parts
+                    middle_name = None
+                elif len(parts) == 3:
+                    first_name, middle_name, last_name = parts
+                else:
+                    raise ValueError(f" Invalid format on line {line_number}: ' {line} '\n\n[*] Each line must contain either a first name and a last name or a first name, middle name, and last name, separated by spaces.")
+
                 emails.extend(generate_emails(first_name, last_name, middle_name, domain))
+
     except FileNotFoundError:
         print(f"Error: The file {file_path} was not found.")
         sys.exit(1)
-    except ValueError:
-        print(f"Error: Each line in the file should contain a first name and a last name (and optionally a middle name) separated by space.")
+    except ValueError as e:
+        print(f"Error: {e}")
         sys.exit(1)
+    
     return emails
 
 def main():
