@@ -4,7 +4,7 @@ This Python script generates email ID combinations based on first names, last na
 
 ## Features
 
-- Generate email IDs based on first name, last name, and domain.
+- Generate email IDs based on first name, middle name , last name, and domain.
 - Save generated email IDs to a `.txt` or `.csv` file.
 - Process input from either command-line arguments or a text file.
 
@@ -23,10 +23,11 @@ You can use the script by providing either first name and last name directly or 
 ### 1. Generate Emails from Command-Line Arguments:
 
 ```bash
-python email_generator.py -f FIRSTNAME -l LASTNAME -d DOMAIN [-s FILENAME]
+python email_generator.py -f FIRSTNAME -l LASTNAME [-m MIDDLENAME] -d DOMAIN [-s FILENAME]
 ```
-- -f: First Name
+- -f: First Name 
 - -l: Last Name
+- -m: Middle Name
 - -d: Company Domain (required)
 - -s: Specify the output file name and format (e.g., emails.txt or emails.csv)
 
@@ -45,7 +46,7 @@ python email_generator.py -i INPUTFILE -d DOMAIN [-s FILENAME]
 ### 1. From command-line arguments:
 
 ```bash
-python email_generator.py -f John -l Doe -d example.com -s emails.csv
+python email_generator.py -f John -l Doe -m govinda -d example.com -s emails.csv
 ```
 
 ### From an input file:
@@ -55,7 +56,7 @@ python email_generator.py -i names.txt -d example.com -s emails.txt
 ```
 ```bash
 names.txt format is as below:
-John Doe
+John govinda Doe
 Jane Smith
 ```
 
